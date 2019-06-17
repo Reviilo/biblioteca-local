@@ -1,0 +1,3 @@
+# Vision General
+
+El personal de la biblioteca utilizará el sitio web de la biblioteca local para almacenar información sobre libros y prestatarios, mientras que los miembros de la biblioteca lo usarán para buscar y buscar libros, averiguar si hay copias disponibles y luego reservarlas o pedirlas prestadas. Con el fin de almacenar y recuperar información de manera eficiente, la almacenaremos en una base de datos .

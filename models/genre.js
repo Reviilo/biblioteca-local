@@ -1,9 +1,11 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
-var GenreSchema = Schema({
+var Schema = mongoose.Schema;
+
+var GenreSchema = new Schema({
     name    :   {
         type    :   String,
+        ref     :   'Genre',
         required:   true,
         min     :   3,
         max     :   100

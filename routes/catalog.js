@@ -86,30 +86,30 @@ router.post('/genre/:id/delete', genre_controller.genre_delete_post)
 router.get('/genre/:id', genre_controller.genre_detail)
 
 // GET request a list of all Genres
-router.post('/genres', genre_controller.genre_list)
+router.get('/genres', genre_controller.genre_list)
 
 /// BOOKINSTACE ROUTES ///
 
 // GET resquest for creating BookIsntance
-router.get('/booksintance/:id/create', book_instance_controller.bookinstance_create_get)
+router.get('/bookinstance/:id/create', book_instance_controller.bookinstance_create_get)
 
 // POST request for creating BookInstance
-router.post('/booksintance/:id/create', book_instance_controller.bookinstance_create_post)
+router.post('/bookinstance/:id/create', book_instance_controller.bookinstance_create_post)
 
 // GET resquest to update BookInstance
-router.get('/booksintance/:id/update', book_instance_controller.bookinstance_create_get)
+router.get('/bookinstance/:id/update', book_instance_controller.bookinstance_create_get)
 
 // POST request to update BookInstance
-router.post('/booksintance/:id/update', book_instance_controller.bookinstance_update_post)
+router.post('/bookinstance/:id/update', book_instance_controller.bookinstance_update_post)
 
 // GET resquest to delete BookInstance
-router.get('/booksintance/:id/delete', book_instance_controller.bookinstance_create_get)
+router.get('/bookinstance/:id/delete', book_instance_controller.bookinstance_create_get)
 
 // POST request to delete BookInstance
-router.post('/booksintance/:id/delete', book_instance_controller.bookinstance_delete_post)
+router.post('/bookinstance/:id/delete', book_instance_controller.bookinstance_delete_post)
 
 // GET resquest for one BookInstance
-router.get('/booksintance/:id', book_instance_controller.bookinstance_detail)
+router.get('/bookinstance/:id', book_instance_controller.bookinstance_detail)
 
 // GET resquest for list of all BookInstance
 router.get('/bookinstances', book_instance_controller.bookinstance_list)

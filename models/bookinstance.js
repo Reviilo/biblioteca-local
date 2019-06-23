@@ -19,12 +19,13 @@ BookInstanceSchema
     return '/catalog/bookinstance/' + this._id
   } )
 
-  // Virtual for due back formatted 
+// Virtual for due back formatted 
 BookInstanceSchema
   .virtual('due_back_formatted')
   .get( function () {
     return moment(this.due_back).format('MMMM Do, YYYY')
   } )
+
 
 //Export model
 module.exports = mongoose.model('BookInstance', BookInstanceSchema)

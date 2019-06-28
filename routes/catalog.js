@@ -39,10 +39,10 @@ router.get('/books', book_controller.book_list)
 /// AUTHOR ROUTES ///
 
 // GET request for creating a Author. NOTE This must come befor route for id (i.e. display author).
-router.get('/author/:id/create', author_controller.author_create_get)
+router.get('/author/create', author_controller.author_create_get)
 
 // POST request for creating Author.
-router.post('/author/:id/create', author_controller.author_create_post)
+router.post('/author/create', author_controller.author_create_post)
 
 // GET request to delete Author
 router.get('/author/:id/delete', author_controller.author_delete_get)
@@ -65,10 +65,10 @@ router.get('/authors', author_controller.author_list)
 /// GENRE ROUTES ///
 
 // GET request for creating a Genre. NOTE this must come before route that displays Genre (suse id).
-router.get('/genre/:id/create', genre_controller.genre_create_get)
+router.get('/genre/create', genre_controller.genre_create_get)
 
 // POST reqquest for creating a Genre.
-router.post('/genre/:id/create', genre_controller.genre_create_post)
+router.post('/genre/create', genre_controller.genre_create_post)
 
 // GET request to update a Genre.
 router.get('/genre/:id/update', genre_controller.genre_update_get)
@@ -91,10 +91,10 @@ router.get('/genres', genre_controller.genre_list)
 /// BOOKINSTACE ROUTES ///
 
 // GET resquest for creating BookIsntance
-router.get('/bookinstance/:id/create', book_instance_controller.bookinstance_create_get)
+router.get('/bookinstance/create', book_instance_controller.bookinstance_create_get)
 
 // POST request for creating BookInstance
-router.post('/bookinstance/:id/create', book_instance_controller.bookinstance_create_post)
+router.post('/bookinstance/create', book_instance_controller.bookinstance_create_post)
 
 // GET resquest to update BookInstance
 router.get('/bookinstance/:id/update', book_instance_controller.bookinstance_create_get)

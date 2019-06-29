@@ -53,6 +53,7 @@ exports.genre_create_get = function(req, res, next) {
     // res.send('NOT IMPLEMENTED: Genre create GET');
 
     res.render('genre_form', { title: 'Create Genre' });
+    
 };
 
 // Handle Genre create on POST.

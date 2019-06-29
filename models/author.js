@@ -37,15 +37,15 @@ AuthorSchema
 AuthorSchema
   .virtual('date_of_birth_formatted')
   .get( function () {
-    return moment(this.date_of_birth).format('YYYY-MM-DD')
-  } );
+    return moment.utc(this.date_of_birth).format('YYYY-MM-DD')
+} );
 
 // Virtual for date of birth formatted
 AuthorSchema
   .virtual('date_of_death_formatted')
   .get( function () {
-    return moment(this.date_of_death).format('YYYY-MM-DD')
-  } );
+    return moment.utc(this.date_of_death).format('YYYY-MM-DD')
+} );
 
 //Export model
 module.exports = mongoose.model('Author', AuthorSchema);

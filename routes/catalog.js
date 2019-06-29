@@ -97,7 +97,7 @@ router.get('/bookinstance/create', book_instance_controller.bookinstance_create_
 router.post('/bookinstance/create', book_instance_controller.bookinstance_create_post)
 
 // GET resquest to update BookInstance
-router.get('/bookinstance/:id/update', book_instance_controller.bookinstance_create_get)
+router.get('/bookinstance/:id/update', book_instance_controller.bookinstance_update_get)
 
 // POST request to update BookInstance
 router.post('/bookinstance/:id/update', book_instance_controller.bookinstance_update_post)

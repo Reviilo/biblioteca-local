@@ -7,12 +7,16 @@ block content
         a(href=bookinstance.book.url) #{bookinstance.book.title}
     p #[strong Imprint:] #{bookinstance.imprint}
 
-    p #[strong Status:]
+    p #[strong Status:] 
         if bookinstance.status=='Available'
-            span.text-success #{bookinstance.status}
+            span.text-success #{bookinstance.status} 
         else if bookinstance.status=='Mantance'
-            span.text-warning #{bookinstance.status}
+            span.text-warning #{bookinstance.status} 
         else
-            span.text-danger #{bookinstance.status}
+            span.text-danger #{bookinstance.status} 
         if bookinstance.status!='Available'
-            span (DUO: ${bookinstance.due_back_formatted})
+            span (DUO: #{bookinstance.due_back_formatted}) 
+
+    hr
+    p
+        a(href=bookinstance.url+'/update') Update

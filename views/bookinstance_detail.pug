@@ -16,3 +16,7 @@ block content
             span.text-danger #{bookinstance.status}
         if bookinstance.status!='Available'
             span (DUO: ${bookinstance.due_back_formatted})
+    
+    hr
+    p
+        a(href=bookinstance.url+'/delete') Delete

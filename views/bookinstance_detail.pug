@@ -20,3 +20,6 @@ block content
     hr
     p
         a(href=bookinstance.url+'/update') Update
+            span (DUO: ${bookinstance.due_back_formatted})
+    p
+        a(href=bookinstance.url+'/delete') Delete

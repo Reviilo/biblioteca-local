@@ -22,7 +22,7 @@ router.post('/book/create', book_controller.book_create_post)
 router.get('/book/:id/delete', book_controller.book_delete_get)
 
 // POST request for one book.
-router.get('/book/:id/delete', book_controller.book_delete_post)
+router.post('/book/:id/delete', book_controller.book_delete_post)
 
 // GET request to update Book.
 router.get('/book/:id/update', book_controller.book_update_get)
@@ -103,7 +103,7 @@ router.get('/bookinstance/:id/update', book_instance_controller.bookinstance_upd
 router.post('/bookinstance/:id/update', book_instance_controller.bookinstance_update_post)
 
 // GET resquest to delete BookInstance
-router.get('/bookinstance/:id/delete', book_instance_controller.bookinstance_create_get)
+router.get('/bookinstance/:id/delete', book_instance_controller.bookinstance_delete_get)
 
 // POST request to delete BookInstance
 router.post('/bookinstance/:id/delete', book_instance_controller.bookinstance_delete_post)

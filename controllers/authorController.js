@@ -101,12 +101,13 @@ exports.author_update_post = [
             res.render('author_form', { title: 'Update Author', author: author, errors: errors.array() });
             return;
         } else {
-            var author = {
+            var author = new Author({
                 first_name: req.body.first_name,
                 family_name: req.body.family_name,
                 date_of_birth: req.body.date_of_birth,
-                date_of_death: req.body.date_of_death
-            }
+                date_of_death: req.body.date_of_death,
+                _id: req.params.id // This is required, or a new ID will be assigned!
+            });
 
             Author.findByIdAndUpdate(req.params.id, author, {}, (err, theauthor) => {
                 if (err) { return next(err); }

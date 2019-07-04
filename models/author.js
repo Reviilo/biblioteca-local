@@ -44,7 +44,11 @@ AuthorSchema
 AuthorSchema
   .virtual('date_of_death_formatted')
   .get( function () {
-    return moment.utc(this.date_of_death).format('YYYY-MM-DD')
+    if ( this.date_of_death === null || this.date_of_death === undefined ) {
+      return '';
+    } else {
+      return moment.utc(this.date_of_death).format('YYYY-MM-DD')
+    }
 } );
 
 //Export model

@@ -4,6 +4,8 @@ var Genre = require('../models/genre');
 var BookInstance = require('../models/bookinstance');
 const { body, validationResult, sanitizeBody } = require('express-validator');
 
+var debug = require('debug')('book');
+
 var async = require('async');
 
 exports.index = function(req, res) {   
@@ -35,7 +37,10 @@ exports.book_list = function(req, res, next) {
     Book.find({}, 'title Author')
         .populate('author')
         .exec( function (err, list_books) {
-            if (err) { return next(err) }
+            if (err) { // Error in API usage.
+                debug('update error:' + err);
+                return next(err);
+            }
             // Succesfull, so render.
             res.render('book_list', { title: 'Book List', book_list: list_books })
         } )
@@ -62,7 +67,10 @@ exports.book_detail = function(req, res, next) {
           .exec(callback);
         },
     }, function (err, results) {
-        if (err) { return next(err) }
+        if (err) { // Error in API usage.
+            debug('update error:' + err);
+            return next(err);
+        }
         if (results.book==null) { // No results.
             var err = new Error('Book not found');
             err.status = 404;
@@ -88,7 +96,10 @@ exports.book_create_get = function(req, res) {
             Genre.find(callback);
         },
     }, function (err, results) {
-        if (err) { return next(err); }
+        if (err) { // Error in API usage.
+            debug('update error:' + err);
+            return next(err);
+        }
         // Succesful, so render.
         res.render('book_form', { title: 'Create Book', authors: results.authors, genres: results.genres });
     });
@@ -145,7 +156,10 @@ exports.book_create_post = [
                     Genre.find(callback);
                 },
             }, function(err, results) {
-                if (err) { return next(err); }
+                if (err) { // Error in API usage.
+                    debug('update error:' + err);
+                    return next(err);
+                }
 
                 // Mark our selected genres as checked.
                 for (let i = 0; i < results.genres.length; i++) {
@@ -180,7 +194,10 @@ exports.book_delete_get = function(req, res) {
             BookInstance.find({ 'book': req.params.id }).exec(callback)
         },
     }, (err, results) => {
-        if (err) { return next(err); }
+        if (err) { // Error in API usage.
+            debug('update error:' + err);
+            return next(err);
+        }
         if(results.book==null) { // No results.
             res.redirect('catalog/books')
             return;
@@ -203,7 +220,10 @@ exports.book_delete_post = function(req, res, next) {
             BookInstance.find({ 'book': req.body.bookid }).exec(callback)
         },
     }, (err, results) => {
-        if (err) { return next(err); }
+        if (err) { // Error in API usage.
+            debug('update error:' + err);
+            return next(err);
+        }
         if(results.book_instances > 0) { // No results.
             res.render('book_delete', { title: 'Delete Book', book: results.book, book_instances: results.book_instances })
         } else {
@@ -233,7 +253,10 @@ exports.book_update_get = function(req, res, next) {
             Genre.find(callback);
         },
         }, function(err, results) {
-            if (err) { return next(err); }
+            if (err) { // Error in API usage.
+                debug('update error:' + err);
+                return next(err);
+            }
             if (results.book==null) { // No results.
                 var err = new Error('Book not found');
                 err.status = 404;
@@ -308,7 +331,10 @@ exports.book_update_post = [
                 genres: function(callback) {
                     Genre.find(callback);
                 }, function(err, results) {
-                    if (err) { return next(err); }
+                    if (err) { // Error in API usage.
+                        debug('update error:' + err);
+                        return next(err);
+                    }
 
                     // Mark our select genres as checked.
                     for (let i=0; i < results.genres.length; i++) {
@@ -323,7 +349,10 @@ exports.book_update_post = [
         } else {
             // Data from form is valid. Update the record.
             Book.findByIdAndUpdate(req.params.id, book, {}, function (err, thebook) {
-                if (err) { return next(err); }
+                if (err) { // Error in API usage.
+                    debug('update error:' + err);
+                    return next(err);
+                }
                 // Successful - redirect to book page.
                 res.redirect(thebook.url);
             });

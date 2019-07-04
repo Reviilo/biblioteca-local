@@ -3,6 +3,8 @@ var Book = require('../models/book');
 const { body, validationResult, sanitizeBody } = require('express-validator');
 var async = require('async');
 
+var debug = require('debug')('bookinstance');
+
 // Display list of all BookInstances.
 exports.bookinstance_list = function(req, res, next) {
     // res.send('NOT IMPLEMENTED: BookInstance list');
@@ -10,7 +12,10 @@ exports.bookinstance_list = function(req, res, next) {
     BookInstance.find()
         .populate('book')
         .exec( function (err, list_bookinstances) {
-            if (err) { return next(err); }
+            if (err) { // Error in API usage.
+                debug('update error:' + err);
+                return next(err);
+            }
             // Succesful, so render
             res.render('bookinstance_list', { title: 'Book Instances list', bookinstances_list: list_bookinstances });
         } );
@@ -25,7 +30,10 @@ exports.bookinstance_detail = function(req, res, next) {
     BookInstance.findById(req.params.id)
         .populate('book')
         .exec( function (err, bookinstance) {
-            if (err) { return next(err); }
+            if (err) { // Error in API usage.
+                debug('update error:' + err);
+                return next(err);
+            }
             if (bookinstance == null) { // No results
                 var err = new Error('Book copy not found.')
                 err.status = 404;
@@ -43,7 +51,10 @@ exports.bookinstance_create_get = function(req, res, next) {
     // 
     Book.find({}, 'title')
         .exec( function (err, books) {
-            if (err) { return next(err); }
+            if (err) { // Error in API usage.
+                debug('update error:' + err);
+                return next(err);
+            }
             // Success, so render.
             res.render( 'bookinstance_form', { title: 'Create BookInstance', book_list: books });
         } );
@@ -83,14 +94,20 @@ exports.bookinstance_create_post = [
             // There are errors. Render form again with sanitized values and error messages.
             Book.find({}, 'title')
                 .exec( function (err, books) {
-                    if (err) { return next(err); }
+                    if (err) { // Error in API usage.
+                        debug('update error:' + err);
+                        return next(err);
+                    }
                     // Success, so render.
                     res.render('bookinstance_form', { title: 'Create BookInstance', list_books: books })
                 } );
         } else {
             // Data from form is valid
             bookinstance.save( function (err) {
-                if (err) {return next(err); }
+                if (err) { // Error in API usage.
+                    debug('update error:' + err);
+                    return next(err);
+                }
                 res.redirect(bookinstance.url);
             } );
         }
@@ -102,7 +119,10 @@ exports.bookinstance_delete_get = function(req, res) {
     // res.send('NOT IMPLEMENTED: BookInstance delete GET');
 
     BookInstance.findById(req.params.id).populate('book').exec( (err, bookinstance) => {
-        if (err) { return next(err); }
+        if (err) { // Error in API usage.
+            debug('update error:' + err);
+            return next(err);
+        }
         if (bookinstance==null) { // No results
             var err = new Error('Book copy not found.')
             err.status = 404;
@@ -119,7 +139,10 @@ exports.bookinstance_delete_post = function(req, res) {
     // res.send('NOT IMPLEMENTED: BookInstance delete POST');
 
     BookInstance.findByIdAndRemove(req.body.bookinstanceid, function deleteBookInstance (err) {
-        if (err) { return next(err); }
+        if (err) { // Error in API usage.
+            debug('update error:' + err);
+            return next(err);
+        }
         // Succes, so redirect.
         res.redirect('/catalog/bookinstances')
       })
@@ -139,7 +162,10 @@ exports.bookinstance_update_get = function(req, res) {
         },
         
     }, function (err, results) {
-        if (err) { return next(err); }
+        if (err) { // Error in API usage.
+            debug('update error:' + err);
+            return next(err);
+        }
         if (results==null) { // No results.
             var err = new Error('Book copy not found.');
             err.status = 400;
@@ -181,13 +207,19 @@ exports.bookinstance_update_post = [
 
         if (!errors.isEmpty()) {
             Book.find({}, (err, books) => {
-                if (err) { return next(err); }
+                if (err) { // Error in API usage.
+                    debug('update error:' + err);
+                    return next(err);
+                }
                 // Success, so render.
                 res.render('bookinstance_form', { title: 'Update BookInstance', bookinstance: bookinstance, book_list: books })
             })
         } else {
             BookInstance.findByIdAndUpdate(req.params.id, bookinstance, {}, function (err, thebookinstance) {
-                if (err) { return next(err); }
+                if (err) { // Error in API usage.
+                    debug('update error:' + err);
+                    return next(err);
+                }
                 // Successful - redirect to bookinstance page.
                 res.redirect(thebookinstance.url)
             })
